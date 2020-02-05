@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- meta -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="icon" type="image/x-icon" href="/images/giblog-logo.png">
+<link rel="stylesheet" type="text/css" href="/css/common.css">
+
+<title>SPVMのn次元配列のデータ構造を実装するためにNumPyのデータ構造を調べる - Perlゼミ ソフトウェア研究所</title>
+<meta name="description" content="SPVMのn次元配列のデータ構造を実装するためにNumPyのndarrayのデータ構造を調べる。">
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <!-- header -->
+<div class="main">
+  <h1>
+    <a href="/">Perlゼミ ソフトウェア研究所</a>
+  </h1>
+</div>
+
+      </div>
+      <div class="main">
+        <div class="content">
+          <div class="entry">
+  <div class="top">
+    <!-- top -->
+
+  </div>
+  <div class="middle">
+    <h2><a href="/blog/20200205154343.html">SPVMのn次元配列のデータ構造を実装するためにNumPyのデータ構造を調べる</a></h2>
+<p>
+  SPVMのn次元配列のデータ構造を実装するためにNumPyのndarrayのデータ構造を調べる。
+</p>
+<p>
+  <a href="https://codezine.jp/article/detail/11211">NumPyで使われる多次元配列のデータ構造「ndarray」とは？</a>
+</p>
+<pre>
+属性	説明
+T	いわゆる転置を返す。ndim&lt;2の時は元の配列が返される
+data	配列のデータがどこから始まっているのかを示すPythonのバッファオブジェクト
+dtype	ndarrayに含まれる要素が持つデータ型
+flags	メモリ上におけるndarrayのデータの格納の仕方（Memory Layout）についての情報
+flat	ndarrayを1次元配列に変換するイテレータ
+imag	ndarrayにおける虚数部分（imaginary part）
+real	ndarrayにおける実数部分（real part）
+size	ndarrayに含まれる要素の数
+itemsize	バイト単位での1つ1つの要素のメモリ消費量
+nbytes	ndarrayの要素によって占められるバイト単位におけるメモリ消費量
+ndim	ndarrayに含まれる次元の数
+shape	ndarrayの形状（shape）をタプルで表したもの
+strides	各次元方向に1つ隣の要素に移動するために必要なバイト数をタプルで表示し たもの
+ctypes	ctypesモジュールで扱うためのイテレータ
+base	ndarrayのベースとなるオブジェクト（どのメモリを参照しているのか）
+</pre>
+<p>
+  この中には、キャッシュされていそうなものもあって、どれが、最低限必要か。
+</p>
+<p>
+  T 転置は必要。
+</p>
+<p>
+  data は、baseから見たオフセットで管理できそう。
+</p>
+<p>
+  dtypeは、SPVMは静的型なのでいらなさそう。
+</p>
+<p>
+  flagsは、補助的な情報かな。
+</p>
+<p>
+  flatは、直接配列を参照できれば、よさそう。
+</p>
+<p>
+  realとimagは、SPVMには、複素数配列型が存在するので、こちらで実装できそう。
+</p>
+<p>
+  itemsizeは、SPVMは静的型だから関係なさそう。
+</p>
+<p>
+  nbytesは、計算できそう。
+</p>
+<p>
+  ndimは、shapeの要素数から取得できそう。
+</p>
+<p>
+  shapeは必要。
+</p>
+<p>
+  stridesが環境によって違うのは、ポインタを使っているからなのかな? あるいはデータ型によって幅が異なるのか? SPVMは、静的型だから関係なさそう。
+</p>
+<p>
+  ctypesというのは、SPVMでは関係がなさそう。SPVMは静的型なので。
+</p>
+<p>
+  baseというのは、C言語の配列の先頭を指していそう。
+</p>
+<p>
+  これに加えて、
+</p>
+<p>
+  numpyは、整数型の非値を表現できないということが分かったので、これを解決できるデータを持ちたい。
+</p>
+<p>
+  これを元にSPVM::NDArray::Int,SPVM::NDArray::Long, SPVM::NDArray::Float, SPVM::NDARRAY::Doubleなどを作る。
+</p>
+<p>
+  floatがあるとGPUと相性がよさそうね。
+</p>
+
+  </div>
+  <div class="bottom">
+    <!-- bottom -->
+
+  </div>
+</div>
+
+        </div>
+        <div class="side">
+          <!-- side -->
+<div class="side-list">
+  <div class="side-list-title">
+    コンテンツ
+  </div>
+  <ul>
+    <li><a href="/list.html">記事一覧</a></li>
+  </ul>
+</div>
+
+        </div>
+      </div>
+      <div class="footer">
+        <!-- footer -->
+<a href="https://github.com/yuki-kimoto/giblog">Giblog</a>
+
+      </div>
+    </div>
+  </body>
+</html>
