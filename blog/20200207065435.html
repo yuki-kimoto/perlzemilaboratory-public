@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- meta -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="icon" type="image/x-icon" href="/images/giblog-logo.png">
+<link rel="stylesheet" type="text/css" href="/css/common.css">
+
+<title>数学で複素行列を計算するためには、SPVMの現在のデータ構造ではできないことがわかった - Perlゼミ ソフトウェア研究所</title>
+<meta name="description" content="数学で複素行列を計算するためにはSPVMの現在のデータ構造ではできないことがわかった。">
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <!-- header -->
+<div class="main">
+  <h1>
+    <a href="/">Perlゼミ ソフトウェア研究所</a>
+  </h1>
+</div>
+
+      </div>
+      <div class="main">
+        <div class="content">
+          <div class="entry">
+  <div class="top">
+    <!-- top -->
+
+  </div>
+  <div class="middle">
+    <h2><a href="/blog/20200207065435.html">数学で複素行列を計算するためには、SPVMの現在のデータ構造ではできないことがわかった</a></h2>
+<p>
+  数学で複素行列を計算するためには<a href="https://github.com/yuki-kimoto/SPVM">SPVM</a>の現在のデータ構造ではできないことがわかった。
+</p>
+<p>
+  SPVMは、複数数値型を持っているが、これは最大16個の数値を持っているので、4×4行列までは表現できる。
+</p>
+<p>
+  だけど、少し調べていると、複素行列というのがあって、これだと、一つの要素に、実数と虚数を表現しないといけないので、さらに2倍、32個必要。
+</p>
+<p>
+  SPVMの目標は、数値計算だから、そもそも、このデータ構造を表現できないと、用途が狭められてしまう。
+</p>
+<p>
+  なぜ最大16かというと、SPVMの命令長は64bitで、ぎりぎりにつめてこの数になっている。
+</p>
+<p>
+  これはパフォーマンスのために、つめているのだけれど、そもそも、数値計算に利用できないと意味ないので、命令長を伸ばすしかない。
+</p>
+<p>
+  ランタイムのパフォーマンスは落ちるが、プリコンパイルした場合は、C言語のソースになるので、パフォーマンスは、まったく落ちない。
+</p>
+<p>
+  妥協して、ランタイムのパフォーマンスを犠牲にして、128bitの命令長にしよう。それしかない。
+</p>
+
+  </div>
+  <div class="bottom">
+    <!-- bottom -->
+
+  </div>
+</div>
+
+        </div>
+        <div class="side">
+          <!-- side -->
+<div class="side-list">
+  <div class="side-list-title">
+    コンテンツ
+  </div>
+  <ul>
+    <li><a href="/list.html">記事一覧</a></li>
+  </ul>
+</div>
+
+        </div>
+      </div>
+      <div class="footer">
+        <!-- footer -->
+<a href="https://github.com/yuki-kimoto/giblog">Giblog</a>
+
+      </div>
+    </div>
+  </body>
+</html>
