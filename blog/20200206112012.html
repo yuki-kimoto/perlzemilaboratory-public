@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- meta -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="icon" type="image/x-icon" href="/images/giblog-logo.png">
+<link rel="stylesheet" type="text/css" href="/css/common.css">
+
+<title>NumPyのndarrayに互換性の高いSPVMのデータ構造をさっそく作成した - Perlゼミ ソフトウェア研究所</title>
+<meta name="description" content="NumPyのndarrayに互換性の高いSPVMのデータ構造をさっそく作成した。8bit,16bit,32bit,64bit符号付整数型、32bit, 64bit浮動小数点型、文字列型、32bit,64bit浮動小数点複素数型。加えて、非値の情報を持てるようにした。">
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <!-- header -->
+<div class="main">
+  <h1>
+    <a href="/">Perlゼミ ソフトウェア研究所</a>
+  </h1>
+</div>
+
+      </div>
+      <div class="main">
+        <div class="content">
+          <div class="entry">
+  <div class="top">
+    <!-- top -->
+
+  </div>
+  <div class="middle">
+    <h2><a href="/blog/20200206112012.html">NumPyのndarrayに互換性の高いSPVMのデータ構造をさっそく作成した</a></h2>
+<p>
+  NumPyのndarrayに互換性の高い<a href="https://github.com/yuki-kimoto/SPVM">SPVM</a>のデータ構造をさっそく作成した。8bit,16bit,32bit,64bit符号付整数型、32bit, 64bit浮動小数点型、文字列型、32bit,64bit浮動小数点複素数型。加えて、非値の情報を持てるようにした。
+</p>
+<p>
+  データ操作のアルゴリズムは、SPVMコアでは提供しない。
+</p>
+<p>
+  数値計算においては、アルゴリズムやハードウェアこそが、本質になってくると思うから。CPUかGPUかOpenMPかSIMDで数値計算するかは、この上にフレームワークを作る実装者が選べたほうがよいはず。
+</p>
+<pre>
+package SPVM::NDArray::Byte : public {
+  has base : public byte[];
+  has offset : public int;
+  has length : public int;
+  has trans : public byte;
+  has shape : public int[];
+  has na_flags : public byte[];
+}
+package SPVM::NDArray::ComplexDouble : public {
+  has base : public SPVM::Complex_2d[];
+  has offset : public int;
+  has length : public int;
+  has trans : public byte;
+  has shape : public int[];
+  has na_flags : public byte[];
+}
+package SPVM::NDArray::ComplexFloat : public {
+  has base : public SPVM::Complex_2f[];
+  has offset : public int;
+  has length : public int;
+  has trans : public byte;
+  has shape : public int[];
+  has na_flags : public byte[];
+}
+package SPVM::NDArray::Double : public {
+  has base : public double[];
+  has offset : public int;
+  has length : public int;
+  has trans : public byte;
+  has shape : public int[];
+  has na_flags : public byte[];
+}
+package SPVM::NDArray::Float public {
+  has base : public float[];
+  has offset : public int;
+  has length : public int;
+  has trans : public byte;
+  has shape : public int[];
+  has na_flags : public byte[];
+}
+package SPVM::NDArray::Int : public {
+  has base : public int[];
+  has offset : public int;
+  has length : public int;
+  has trans : public byte;
+  has shape : public int[];
+  has na_flags : public byte[];
+}
+package SPVM::NDArray::Long : public {
+  has base : public long[];
+  has offset : public int;
+  has length : public int;
+  has trans : public byte;
+  has shape : public int[];
+  has na_flags : public byte[];
+}
+package SPVM::NDArray::Short : public {
+  has base : public short[];
+  has offset : public int;
+  has length : public int;
+  has trans : public byte;
+  has shape : public int[];
+  has na_flags : public byte[];
+}
+package SPVM::NDArray::String : public {
+  has base : public string[];
+  has offset : public int;
+  has length : public int;
+  has trans : public byte;
+  has shape : public int[];
+  has na_flags : public byte[];
+}
+</pre>
+
+  </div>
+  <div class="bottom">
+    <!-- bottom -->
+
+  </div>
+</div>
+
+        </div>
+        <div class="side">
+          <!-- side -->
+<div class="side-list">
+  <div class="side-list-title">
+    コンテンツ
+  </div>
+  <ul>
+    <li><a href="/list.html">記事一覧</a></li>
+  </ul>
+</div>
+
+        </div>
+      </div>
+      <div class="footer">
+        <!-- footer -->
+<a href="https://github.com/yuki-kimoto/giblog">Giblog</a>
+
+      </div>
+    </div>
+  </body>
+</html>
