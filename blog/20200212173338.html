@@ -7,8 +7,8 @@
 <link rel="icon" type="image/x-icon" href="/images/giblog-logo.png">
 <link rel="stylesheet" type="text/css" href="/css/common.css">
 
-<title>Entries - Perlゼミ ソフトウェア研究所</title>
-<meta name="description" content="Entries of Perlゼミ ソフトウェア研究所">
+<title>C言語における複数の連続した数値型配列をSPVMで提供する - Perlゼミ ソフトウェア研究所</title>
+<meta name="description" content="たとえば、C言語では、複素数型の配列を、作ることができ、数値は、一直線に連続して並ぶ。">
   </head>
   <body>
     <div class="container">
@@ -29,27 +29,30 @@
 
   </div>
   <div class="middle">
-    <h2><a href="/list.html">Entries</a></h2>
-<ul>
-  <li style="list-style:none;">
-    <b>2020</b>
-  </li>
-  <li style="list-style:none">
-    2/12 <a href="/blog/20200212173338.html">C言語における複数の連続した数値型配列をSPVMで提供する</a>
-  </li>
-  <li style="list-style:none">
-    2/7 <a href="/blog/20200207065435.html">数学で複素行列を計算するためには、SPVMの現在のデータ構造ではできないことがわかった</a>
-  </li>
-  <li style="list-style:none">
-    2/6 <a href="/blog/20200206112012.html">NumPyのndarrayに互換性の高いSPVMのデータ構造をさっそく作成した</a>
-  </li>
-  <li style="list-style:none">
-    2/5 <a href="/blog/20200205154343.html">SPVMのn次元配列のデータ構造を実装するためにNumPyのデータ構造を調べる</a>
-  </li>
-  <li style="list-style:none">
-    2/4 <a href="/blog/20200204170137.html">SPVMにn次元配列を追加する</a>
-  </li>
-</ul>
+    <h2><a href="/blog/20200212173338.html">C言語における複数の連続した数値型配列をSPVMで提供する</a></h2>
+<p>
+  たとえば、C言語では、複素数型の配列を、作ることができ、数値は、一直線に連続して並ぶ。
+</p>
+<p>
+  このような連続した数値型の配列をSPVMは、作ることができる。
+</p>
+<p>
+  たとえば、三次元ベクトルの配列であるとこうだ。これは、64bit浮動小数点型のデータが、メモリ上で一直線に並んでいる。
+</p>
+<pre>
+package SPVM::Vector_3d {
+  has x0 : double;
+  has x1 : double;
+  has x2 : double;
+}
+
+my $vec3s = new SPVM::Vector_3d[10];
+
+$vec3s-&gt;[0]{x0} = 1;
+</pre>
+<p>
+  このような基本データ型を、SPVMで提供したい。
+</p>
 
   </div>
   <div class="bottom">
