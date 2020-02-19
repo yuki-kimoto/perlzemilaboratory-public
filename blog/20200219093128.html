@@ -7,8 +7,8 @@
 <link rel="icon" type="image/x-icon" href="/images/giblog-logo.png">
 <link rel="stylesheet" type="text/css" href="/css/common.css">
 
-<title>C言語における複数の連続した数値型配列をSPVMで提供する - Perlゼミ ソフトウェア研究所</title>
-<meta name="description" content="たとえば、C言語では、複素数型の配列を、作ることができ、数値は、一直線に連続して並ぶ。">
+<title>四元数で3次元回転できるためのデータ構造をSPVMに追加する - Perlゼミ ソフトウェア研究所</title>
+<meta name="description" content="四元数で3次元回転できるためのデータ構造をSPVMに追加しています。">
   </head>
   <body>
     <div class="container">
@@ -29,29 +29,35 @@
 
   </div>
   <div class="middle">
-    <h2><a href="/blog/20200212173338.html">C言語における複数の連続した数値型配列をSPVMで提供する</a></h2>
+    <h2><a href="/blog/20200219093128.html">四元数で3次元回転できるためのデータ構造をSPVMに追加する</a></h2>
 <p>
-  たとえば、C言語では、複素数型の配列を、作ることができ、数値は、一直線に連続して並ぶ。
+  四元数で3次元回転できるためのデータ構造をSPVMに追加しています。
 </p>
 <p>
-  このような連続した数値型の配列をSPVMは、作ることができる。
+  <a href="http://www015.upp.so-net.ne.jp/notgeld/quaternion.html">四元数で3次元回転</a>
 </p>
 <p>
-  たとえば、三次元ベクトルの配列であるとこうだ。これは、64bit浮動小数点型のデータが、メモリ上で一直線に並んでいる。
+  まず四元数を表現できること。
 </p>
 <pre>
-package SPVM::Vector_3d {
-  has x0 : double;
-  has x1 : double;
-  has x2 : double;
+package SPVM::Quaternion_4i : mulnum_t {
+  has t : int;
+  has x : int;
+  has y : int;
+  has z : int;
 }
-
-my $vec3s = new SPVM::Vector_3d[10];
-
-$vec3s-&gt;[0]{x0} = 1;
 </pre>
 <p>
-  このような基本データ型を、SPVMで提供したい。
+  次に四元数を連続したデータ領域の配列に配置できること。
+</p>
+<pre>
+my $quaternions = new SPVM::Quaternion_4i[10000];
+</pre>
+<p>
+  SPVMは、C言語と同じく、この両方を満たすことができます。参照の並びではなく、ぴったりと数値が連続したデータ構造です。
+</p>
+<p>
+  回転させるための四元数をfor文で、連続して適用していくことができます。
 </p>
 
   </div>
